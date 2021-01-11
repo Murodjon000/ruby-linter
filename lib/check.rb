@@ -117,6 +117,13 @@ class CheckError
         log_error("line:#{idx+1} #{mesg2}") if @checker.file_lines[idx-1].strip.split(' ').first.eql?('end')
     end
 
+    def check_end_empty_line(val,idx)
+        mesg='Extra empty line detected at block body end'
+        return unless val.strip.split(' ').first.eql?('end')
+
+        log_error("line:#{idx} #{mesg}") if @checker.file_lines[idx-1].strip.empty?
+    end
+
 
 
     def log_error(error_msg)
