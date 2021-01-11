@@ -6,7 +6,7 @@ class FileReader
         @error_msg=''
         @file_path=file_path
         begin
-            @file_lines=File.readline(@file_path)
+            @file_lines=File.readlines(@file_path)
             @file_lines_count=@file_lines.size
         rescue StandardError => exception
             @file_lines=[]
