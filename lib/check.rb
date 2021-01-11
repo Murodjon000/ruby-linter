@@ -100,6 +100,14 @@ class CheckError
         end        
     end
 
+    def check_class_empty_line(val,idx)
+        mesg='Extra empty line detected at class body beginning'
+        return unless val.strip.split(' ').first.eql?('class')
+
+        log_error("line:#{idx+2} #{mesg}") if @checker.file_lines[idx+1].strip.empty?
+    end
+
+
 
     def log_error(error_msg)
         @errors << error_msg
