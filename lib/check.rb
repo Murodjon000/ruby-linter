@@ -76,4 +76,7 @@ class CheckError
         end
     end
 
+    def log_error(error_msg)
+        @errors << error_msg
+    end
 end
