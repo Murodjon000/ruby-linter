@@ -39,4 +39,27 @@ class CheckError
         log_error("Lint/Syntax:Unexpected 'end'") if status.eql?(-1)
     end
 
+    def check_indentation
+        mesg='IndentationWidth: Use 2 spaces for indentation.'
+        val=0
+        indent_val=0
+
+        @checker.file_lines.each_with_index do |val,idx|
+            strip_line=val.strip.split(' ')
+            exp_val=val * 2
+            res_word=%w[class def if elsif until module unless begin case]
+            
+            next unless !val.strip.empty? || !val.first.eql?('#')
+
+            indent_val+=1 if res_word.include?(strip_line.first) || strip_line.include?('do')
+            indent_val-=1 if val.strip == 'end'
+
+            next if val.strip.empty?
+
+            indent_error(val,idx,exp_val,mesg)
+            val=indent_val
+        end
+    end
+
+  
 end
