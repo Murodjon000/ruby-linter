@@ -40,11 +40,11 @@ class CheckError
     end
   
     def empty_line_error
-      @checker.file_lines.each_with_index do |val, indx|
-        check_class_empty_line(val, indx)
-        check_def_empty_line(val, indx)
-        check_end_empty_line(val, indx)
-        check_do_empty_line(val, indx)
+      @checker.file_lines.each_with_index do |val, idx|
+        check_class_empty_line(val, idx)
+        check_def_empty_line(val, idx)
+        check_end_empty_line(val, idx)
+        check_do_empty_line(val, idx)
       end
     end
   
@@ -55,7 +55,7 @@ class CheckError
       cur_val = 0
       indent_val = 0
   
-      @checker.file_lines.each_with_index do |val, indx|
+      @checker.file_lines.each_with_index do |val, idx|
         strip_line = val.strip.split(' ')
         exp_val = cur_val * 2
         res_word = %w[class def if elsif until module unless begin case]
@@ -67,22 +67,22 @@ class CheckError
   
         next if val.strip.empty?
   
-        indent_error(val, indx, exp_val, msg)
+        indent_error(val, idx, exp_val, msg)
         cur_val = indent_val
       end
     end
   
     private
   
-    def indent_error(val, indx, exp_val, msg)
+    def indent_error(val, idx, exp_val, msg)
       strip_line = val.strip.split(' ')
       emp = val.match(/^\s*\s*/)
       end_chk = emp[0].size.eql?(exp_val.zero? ? 0 : exp_val - 2)
   
       if val.strip.eql?('end') || strip_line.first == 'elsif' || strip_line.first == 'when'
-        log_error("line:#{indx + 1} #{msg}") unless end_chk
+        log_error("line:#{idx + 1} #{msg}") unless end_chk
       elsif !emp[0].size.eql?(exp_val)
-        log_error("line:#{indx + 1} #{msg}")
+        log_error("line:#{idx + 1} #{msg}")
       end
     end
   
@@ -102,34 +102,34 @@ class CheckError
       end
     end
   
-    def check_class_empty_line(val, indx)
+    def check_class_empty_line(val, idx)
       msg = 'Extra empty line detected at class body beginning'
       return unless val.strip.split(' ').first.eql?('class')
   
-      log_error("line:#{indx + 2} #{msg}") if @checker.file_lines[indx + 1].strip.empty?
+      log_error("line:#{idx + 2} #{msg}") if @checker.file_lines[idx + 1].strip.empty?
     end
   
-    def check_def_empty_line(val, indx)
+    def check_def_empty_line(val, idx)
       msg1 = 'Extra empty line detected at method body beginning'
       msg2 = 'Use empty lines between method definition'
   
       return unless val.strip.split(' ').first.eql?('def')
   
-      log_error("line:#{indx + 2} #{msg1}") if @checker.file_lines[indx + 1].strip.empty?
-      log_error("line:#{indx + 1} #{msg2}") if @checker.file_lines[indx - 1].strip.split(' ').first.eql?('end')
+      log_error("line:#{idx + 2} #{msg1}") if @checker.file_lines[idx + 1].strip.empty?
+      log_error("line:#{idx + 1} #{msg2}") if @checker.file_lines[idx - 1].strip.split(' ').first.eql?('end')
     end
   
-    def check_end_empty_line(val, indx)
+    def check_end_empty_line(val, idx)
       return unless val.strip.split(' ').first.eql?('end')
   
-      log_error("line:#{indx} Extra empty line detected at block body end") if @checker.file_lines[indx - 1].strip.empty?
+      log_error("line:#{idx} Extra empty line detected at block body end") if @checker.file_lines[idx - 1].strip.empty?
     end
   
-    def check_do_empty_line(val, indx)
+    def check_do_empty_line(val, idx)
       msg = 'Extra empty line detected at block body beginning'
       return unless val.strip.split(' ').include?('do')
   
-      log_error("line:#{indx + 2} #{msg}") if @checker.file_lines[indx + 1].strip.empty?
+      log_error("line:#{idx + 2} #{msg}") if @checker.file_lines[idx + 1].strip.empty?
     end
   
     def log_error(error_msg)
