@@ -107,6 +107,16 @@ class CheckError
         log_error("line:#{idx+2} #{mesg}") if @checker.file_lines[idx+1].strip.empty?
     end
 
+    def check_def_empty_line(val,idx)
+        mesg1 = 'Extra empty line detected at method body beginning'
+        mesg2 = 'Use empty lines between method definition'
+
+        return unless val.strip.split(' ').first.eql?('def')
+
+        log_error("line:#{idx+2} #{mesg1}") if @checker.file_lines[idx+1].strip.empty?
+        log_error("line:#{idx+1} #{mesg2}") if @checker.file_lines[idx-1].strip.split(' ').first.eql?('end')
+    end
+
 
 
     def log_error(error_msg)
