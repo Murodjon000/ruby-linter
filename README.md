@@ -152,7 +152,7 @@ $ bin/main app.rb
 2. cd into the folder
 3. install rspec by gem install rspec
 4. Run rspec .
-5. 13 examples, 0 failures will be output.
+5. 6 examples, 0 failures will be output.
 
 ​
 ## Contributing
@@ -168,7 +168,7 @@ Feel free to check the [issues page](../../issues).
 Ruby,Text editor,Github profile and Git.
 
 
-## Authors
+## Author
 
 👤 **Murodjon000**
 
