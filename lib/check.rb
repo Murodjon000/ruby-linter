@@ -61,5 +61,19 @@ class CheckError
         end
     end
 
-  
+    private
+
+    def indent_error(val,idx,exp_val,mesg)
+        strip_line=val.strip.split(' ')
+        emp=val.match(/^\s*\s*/)
+        end_check=emp[0].size.eql?(exp_val.zero ? 0 : exp_val-2)
+
+        if val.strip.eql?('end') || val.strip.eql?('elsif') || val.strip.eql?('when')
+            log_error("line:#{idx+1} #{mesg}") unless end_check
+        elsif !emp[0].size.eql?(exp_val)
+            log_error("line:#{idx+1} #{mesg}")
+
+        end
+    end
+
 end
