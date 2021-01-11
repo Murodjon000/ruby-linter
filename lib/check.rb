@@ -39,6 +39,15 @@ class CheckError
         log_error("Lint/Syntax:Unexpected 'end'") if status.eql?(-1)
     end
 
+    def empty_line_error
+        @checker.file_lines.each_with_index do |val,idx|
+            check_class_empty_line(val,idx)
+            check_def_empty_line(val,idx)
+            check_end_empty_line(val,idx)
+            check_do_empty_line(val,idx)
+        end
+    end
+
     def check_indentation
         mesg='IndentationWidth: Use 2 spaces for indentation.'
         val=0
