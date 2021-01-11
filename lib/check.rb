@@ -20,4 +20,10 @@ class CheckError
         end
     end
 
+    def tag_error
+        check_tag_error(/\(/, /\)/, '(', ')', 'Parenthesis')
+        check_tag_error(/\[/, /\]/, '[', ']', 'Square Bracket')
+        check_tag_error(/\{/, /\}/, '{', '}', 'Curly Bracket')
+    end
+    
 end
