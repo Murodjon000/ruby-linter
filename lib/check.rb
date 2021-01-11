@@ -25,5 +25,18 @@ class CheckError
         check_tag_error(/\[/, /\]/, '[', ']', 'Square Bracket')
         check_tag_error(/\{/, /\}/, '{', '}', 'Curly Bracket')
     end
-    
+
+    def end_error
+        key_count=0
+        end_count=0
+        @checker.file_lines.each_with_index  do |val,idx|
+            key_count+=1 if @keywords.include?(val.split(' ').first) || val.split(' ').include?('do')
+            end_count+=1 if val.strip == 'end'
+        end
+
+        status=key_count <=> end_count
+        log_error("Lint/Syntax:Missing 'end'") if status.eql?(1)
+        log_error("Lint/Syntax:Unexpected 'end'") if status.eql?(-1)
+    end
+
 end
