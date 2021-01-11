@@ -85,6 +85,22 @@ class CheckError
         end
     end
 
+    def check_tag_error(*args)
+        @checker.file_lines.each_with_index do |val,idx|
+            open_p=[]
+            close_p=[]
+
+            open_p << val.scan(args[0])
+            close_p << val.scan(args[1])
+
+            status=open_p.flatten.size <=> close_p.flatten.size
+
+            log_error("line:#{idx + 1} Lint/Syntax: Unexpected/Missing token '#{args[2]}' #{args[4]}") if status.eql?(1)
+            log_error("line:#{idx + 1} Lint/Syntax: Unexpected/Missing token '#{args[3]}' #{args[4]}") if status.eql?(-1)
+        end        
+    end
+
+
     def log_error(error_msg)
         @errors << error_msg
     end
