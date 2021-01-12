@@ -1,4 +1,3 @@
-# rubocop:disable all
 class Board
   def initialize(player, board)
     @player = player] 
@@ -11,4 +10,3 @@ class Board
     end
   
 end
-# rubocop:enable all
