@@ -15,7 +15,7 @@ class CheckError
       @checker.file_lines.each_with_index do |val, index|
         if val[-2] == ' ' && !val.strip.empty?
           @errors << "line:#{index + 1}:#{val.size - 1}: Error: Trailing whitespace detected."
-          + " '#{val.gsub(/\s*$/, '_')}'"
+          # + " '#{val.gsub(/\s*$/, '_')}'"
         end
       end
     end
@@ -51,7 +51,7 @@ class CheckError
     # rubocop: disable Metrics/CyclomaticComplexity
   
     def check_indentation
-      msg = 'IndentationWidth: Use 2 spaces for indentation.'
+      mesg = 'IndentationWidth: Use 2 spaces for indentation.'
       cur_val = 0
       indent_val = 0
   
@@ -67,22 +67,22 @@ class CheckError
   
         next if val.strip.empty?
   
-        indent_error(val, idx, exp_val, msg)
+        indent_error(val, idx, exp_val, mesg)
         cur_val = indent_val
       end
     end
   
     private
   
-    def indent_error(val, idx, exp_val, msg)
+    def indent_error(val, idx, exp_val, mesg)
       strip_line = val.strip.split(' ')
       emp = val.match(/^\s*\s*/)
       end_chk = emp[0].size.eql?(exp_val.zero? ? 0 : exp_val - 2)
   
       if val.strip.eql?('end') || strip_line.first == 'elsif' || strip_line.first == 'when'
-        log_error("line:#{idx + 1} #{msg}") unless end_chk
+        log_error("line:#{idx + 1} #{mesg}") unless end_chk
       elsif !emp[0].size.eql?(exp_val)
-        log_error("line:#{idx + 1} #{msg}")
+        log_error("line:#{idx + 1} #{mesg}")
       end
     end
   
@@ -103,20 +103,20 @@ class CheckError
     end
   
     def check_class_empty_line(val, idx)
-      msg = 'Extra empty line detected at class body beginning'
+      mesg = 'Extra empty line detected at class body beginning'
       return unless val.strip.split(' ').first.eql?('class')
   
-      log_error("line:#{idx + 2} #{msg}") if @checker.file_lines[idx + 1].strip.empty?
+      log_error("line:#{idx + 2} #{mesg}") if @checker.file_lines[idx + 1].strip.empty?
     end
   
     def check_def_empty_line(val, idx)
-      msg1 = 'Extra empty line detected at method body beginning'
-      msg2 = 'Use empty lines between method definition'
+      mesg1 = 'Extra empty line detected at method body beginning'
+      mesg2 = 'Use empty lines between method definition'
   
       return unless val.strip.split(' ').first.eql?('def')
   
-      log_error("line:#{idx + 2} #{msg1}") if @checker.file_lines[idx + 1].strip.empty?
-      log_error("line:#{idx + 1} #{msg2}") if @checker.file_lines[idx - 1].strip.split(' ').first.eql?('end')
+      log_error("line:#{idx + 2} #{mesg1}") if @checker.file_lines[idx + 1].strip.empty?
+      log_error("line:#{idx + 1} #{mesg2}") if @checker.file_lines[idx - 1].strip.split(' ').first.eql?('end')
     end
   
     def check_end_empty_line(val, idx)
@@ -126,14 +126,14 @@ class CheckError
     end
   
     def check_do_empty_line(val, idx)
-      msg = 'Extra empty line detected at block body beginning'
+      mesg = 'Extra empty line detected at block body beginning'
       return unless val.strip.split(' ').include?('do')
   
-      log_error("line:#{idx + 2} #{msg}") if @checker.file_lines[idx + 1].strip.empty?
+      log_error("line:#{idx + 2} #{mesg}") if @checker.file_lines[idx + 1].strip.empty?
     end
   
-    def log_error(error_msg)
-      @errors << error_msg
+    def log_error(error_mesg)
+      @errors << error_mesg
     end
   end
   
