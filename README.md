@@ -1,15 +1,9 @@
-# Ruby Capstone Project - Ruby Linter
-# About 
-
-The whole idea of writing code to check another code is intriguing at the same time cognitively demanding. 
-Building Linters for Ruby, the project provides feedback about errors or warnings in code little by little. 
-The project was built completely with Ruby following all possible best practices. Rubocop was used as a code-linter alongside Gitflow to ensure I maintain good coding standards.
-
+# Ruby Capstone Project - Ruby Linter🚀
 
 # The Build
 The custom Ruby linter currently checks/detects for the following errors/warnings.
-- check for wrong indentation
 - check for trailing spaces
+- check for wrong indentation
 - check for missing/unexpected tags i.e. '( )', '[ ]', and '{ }'
 - check missing/unexpected end
 - check empty line error
@@ -123,6 +117,7 @@ class Board
   end
 end
 ~~~
+
 
 ## Built With
 - Ruby
