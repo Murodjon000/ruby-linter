@@ -15,7 +15,6 @@ class CheckError
     @checker.file_lines.each_with_index do |val, index|
       if val[-2] == ' ' && !val.strip.empty?
         @errors << "line:#{index + 1}:#{val.size - 1}: Error: Trailing whitespace detected."
-        # + " '#{val.gsub(/\s*$/, '_')}'"
       end
     end
   end
@@ -97,8 +96,8 @@ class CheckError
 
       status = open_p.flatten.size <=> close_p.flatten.size
 
-      log_error("line:#{index + 1} Lint/Syntax: Unexpected/Missing token '#{args[2]}' #{args[4]}") if status.eql?(1)
-      log_error("line:#{index + 1} Lint/Syntax: Unexpected/Missing token '#{args[3]}' #{args[4]}") if status.eql?(-1)
+      log_error("line:#{index + 1} Lint/Syntax: Unexpected/Missing token '#{args[3]}' #{args[4]}") if status.eql?(1)
+      log_error("line:#{index + 1} Lint/Syntax: Unexpected/Missing token '#{args[2]}' #{args[4]}") if status.eql?(-1)
     end
   end
 
