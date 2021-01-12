@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-require_relative '../lib/check.rb'
+require_relative '../lib/check'
 
 check = CheckError.new('../app.rb')
 check.check_indentation
@@ -9,7 +9,8 @@ check.end_error
 check.empty_line_error
 
 if check.errors.empty? && check.checker.error_msg.empty?
-  puts 'No offenses'.colorize(:green) + ' detected'
+  mesg = 'No offenses'.colorize(:green)
+  puts mesg.concat('detected')
 else
   check.errors.uniq.each do |er|
     puts "#{check.checker.file_path.colorize(:green)} : #{er.colorize(:red)}"
