@@ -21,7 +21,7 @@ describe CheckError do
   describe '#tag_error' do
     it 'should return tag errors' do
       checker.tag_error
-      expect(checker.errors[0]).to eql("line:3 Lint/Syntax: Unexpected/Missing token ']' Square Bracket")
+      expect(checker.errors[0]).to eql("line:3 Lint/Syntax: Unexpected/Missing token '[' Square Bracket")
     end
   end
 
