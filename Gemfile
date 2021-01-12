@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-
-gem 'rspec', '~> 3.10'
 gem 'colorize'
+gem 'rspec', '~> 3.10'
+
