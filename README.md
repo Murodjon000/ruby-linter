@@ -155,9 +155,6 @@ $ bin/main app.rb
 Contributions, issues, and feature requests are welcome!
 Feel free to check the [issues page](../../issues).
 ​
-
-* [License]
-
 ## Prerequisites
 
 Ruby,Text editor,Github profile and Git.
