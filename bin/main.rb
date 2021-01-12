@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require_relative '../lib/check'
 
-check = CheckError.new('./app.rb')
+check = CheckError.new('app.rb')
 check.check_indentation
 check.check_trailing_spaces
 check.tag_error
