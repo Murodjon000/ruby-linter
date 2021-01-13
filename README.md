@@ -145,7 +145,7 @@ $ bin/main app.rb
 ## How to Test
 1. Clone the repo to your local folder
 2. cd into the folder
-3. install rspec by gem install rspec
+3. install gems by bundle install
 4. Run rspec .
 5. 6 examples, 0 failures will be output.
 
