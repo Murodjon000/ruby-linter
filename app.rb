@@ -1,7 +1,7 @@
 class Board
-  def initialize(player, board)
-    @player = player] 
-    @board = board
+  def initialize(player, board)  
+    @player = [player] 
+     @board = board
   end
 
   def board(lines)
@@ -21,4 +21,5 @@ class Board
     sum=a+b)  
   end
 
+end
 end
